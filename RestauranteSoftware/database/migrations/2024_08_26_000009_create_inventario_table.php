@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
 
 class CreateInventarioTable extends Migration
 {
@@ -13,8 +15,8 @@ class CreateInventarioTable extends Migration
             $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
             $table->enum('tipo_movimiento', ['entrada', 'salida']);
             $table->integer('cantidad')->check('cantidad >= 0');
-            $table->timestamp('fecha')->useCurrent();
-            $table->string('comentario')->nullable();
+            $table->datetime('fecha')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('comentario', 255)->nullable();
             $table->foreignId('usuario_id')->nullable()->constrained('usuarios')->onDelete('set null');
             $table->timestamps();
         });

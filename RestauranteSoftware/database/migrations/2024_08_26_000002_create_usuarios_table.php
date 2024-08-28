@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
 
 class CreateUsuariosTable extends Migration
 {
@@ -14,8 +16,8 @@ class CreateUsuariosTable extends Migration
             $table->string('password');
             $table->string('email', 100)->unique();
             $table->boolean('activo')->default(true);
-            $table->timestamp('fecha_creacion')->useCurrent();
-            $table->timestamp('ultimo_login')->nullable();
+            $table->datetime('fecha_creacion')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->datetime('ultimo_login')->nullable();
             $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->timestamps();
         });
@@ -26,5 +28,3 @@ class CreateUsuariosTable extends Migration
         Schema::dropIfExists('usuarios');
     }
 }
-
-

@@ -9,9 +9,10 @@ class CreateProductosTable extends Migration
     public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->id(); // Crea una columna `id` tipo BIGINT UNSIGNED
-            $table->string('nombre'); // Nombre del producto
-            $table->decimal('precio', 10, 2); // Precio del producto
+            $table->id();
+            $table->string('nombre', 100);
+            $table->decimal('precio', 10, 2)->check('precio >= 0');
+            $table->timestamps();
         });
     }
 
@@ -20,3 +21,4 @@ class CreateProductosTable extends Migration
         Schema::dropIfExists('productos');
     }
 }
+

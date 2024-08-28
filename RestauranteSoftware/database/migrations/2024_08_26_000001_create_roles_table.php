@@ -11,8 +11,8 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('role_name', 50)->unique();
-            $table->string('descripcion')->nullable();
-            $table->timestamps();
+            $table->string('descripcion', 255)->nullable();
+            $table->timestamps(); // Incluye campos de timestamp para created_at y updated_at
         });
     }
 
@@ -21,5 +21,4 @@ class CreateRolesTable extends Migration
         Schema::dropIfExists('roles');
     }
 }
-
 

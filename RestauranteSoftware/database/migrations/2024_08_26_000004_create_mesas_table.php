@@ -21,4 +21,3 @@ class CreateMesasTable extends Migration
         Schema::dropIfExists('mesas');
     }
 }
-
